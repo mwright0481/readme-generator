@@ -1,5 +1,5 @@
 
-function generateMarkdown(data, githubInfo) {
+function generateMarkdown(data) {
     return `
   # **${data.title}**
   
@@ -48,12 +48,8 @@ function generateMarkdown(data, githubInfo) {
   
   ## GitHub
   
-  ![Image of me](${githubInfo.githubImage})
-  - ${githubInfo.name}
-  - [GitHub Profile](${githubInfo.profile})
-  - <${githubInfo.email}>
-  
-  `;
+ ${data.username}`
+
   }
   
   module.exports = generateMarkdown;

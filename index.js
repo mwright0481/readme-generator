@@ -1,8 +1,8 @@
-const inquirer = require("inquirer");
 const fs = require('fs');
-const axios = require("axios");
-const generate = require('./utils/generateMarkdown');
-
+const generate = require('./generateMarkdown');
+// let's us use inquirer module.
+var inquirer = require('inquirer');
+// question to determine readme properties.
 const questions = [
     {
         type: "input",
@@ -55,22 +55,12 @@ const questions = [
         message: "What is your repo link?"
     },
 ];
-
+// ask questions in terminal.
 inquirer
     .prompt(questions)
     .then(function(data){
-        const queryUrl = `https://api.github.com/users/${data.username}`;
-
-        axios.get(queryUrl).then(function(res) {
             
-            const githubInfo = {
-                githubImage: res.data.avatar_url,
-                email: res.data.email,
-                profile: res.data.html_url,
-                name: res.data.name
-            };
-            
-          fs.writeFile("README.md", generate(data, githubInfo), function(err) {
+          fs.writeFile("README.md", generate(data), function(err) {
             if (err) {
               throw err;
             };
@@ -79,7 +69,7 @@ inquirer
           });
         });
 
-});
+
 function init() {
 
 }
